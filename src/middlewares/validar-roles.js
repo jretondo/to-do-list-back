@@ -1,4 +1,5 @@
 const { response } = require('express')
+const { error } = require('../network/response')
 
 const tieneRol = (...roles) => {
     return (req, res = response, next) => {

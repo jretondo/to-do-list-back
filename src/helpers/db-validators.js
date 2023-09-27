@@ -17,14 +17,14 @@ const emailNoExiste = async (correo = '') => {
 const existeUsuarioPorId = async (id) => {
     const existeUsuario = await Usuario.findByPk(id);
     if (!existeUsuario) {
-        throw new Error(`El id no existe ${id}`);
+        throw new Error(`El id ${id} no existe`);
     }
 }
 
 const existeTareaPorId = async (id) => {
     const existeTarea = await Tarea.findByPk(id);
     if (!existeTarea) {
-        throw new Error(`El id no existe ${id}`);
+        throw new Error(`El id ${id} no existe`);
     }
 }
 

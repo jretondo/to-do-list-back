@@ -24,6 +24,7 @@ module.exports = () => {
                 } : {}),
                 offset: OFFSET,
                 limit: ITEMS_PER_PAGE,
+                order: [["id", "DESC"]],
                 include: [{
                     model: Usuario,
                     attributes: { exclude: ["password", "estado"] }
@@ -36,6 +37,7 @@ module.exports = () => {
             })
         } else {
             return await Tarea.findAll({
+                order: [["id", "DESC"]],
                 include: [{
                     model: Usuario,
                     attributes: { exclude: ["password", "estado"] }
