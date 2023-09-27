@@ -22,7 +22,7 @@ router
     .get('/', (req, res, next) => usuariosGet().then((data) => success({ req, res, body: data })).catch(next))
 
     .post('/', [
-        check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+        check('nombre', 'El nombre debe tener una longitud de 5 caracteres').isLength({ min: 5 }),
         check('password', 'El password debe de ser más de 6 digitos').isLength({ min: 6 }),
         check('correo', 'El correo no es válido').isEmail(),
         check('correo').custom(emailExiste),
@@ -33,6 +33,8 @@ router
     .put('/:id', [
         validarJWT,
         tieneRol('ADMIN_ROL'),
+        check('nombre', 'El nombre debe tener una longitud de 5 caracteres').if(check('nombre').notEmpty()).isLength({ min: 5 }),
+        check('password', 'El password debe de ser más de 6 digitos').if(check('password').notEmpty()).isLength({ min: 6 }),
         check('id').custom(existeUsuarioPorId),
         validarCampos
     ], (req, res, next) => usuariosPut(req).then(body => success({ req, res, body })).catch(next))

@@ -23,4 +23,3 @@ const generarJWT = (userData = {}) => {
 module.exports = {
     generarJWT
 }
-

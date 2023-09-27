@@ -33,7 +33,7 @@ const Tarea = dbConnection.define("Tarea", {
     createdAt: 'fecha_creacion',
     updatedAt: false
 });
-
+//Usuario.sync({ alter: true })
 Usuario.hasMany(Tarea, {
     foreignKey: "usuario_id",
     sourceKey: "id",

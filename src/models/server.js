@@ -23,6 +23,7 @@ class Server {
     handleConn = async () => {
         try {
             await dbConnection.authenticate();
+            //dbConnection.sync({ alter: true })
             console.log('Base de datos conectada con éxito!');
         } catch (error) {
             console.error('No se ha podido conectar a la base de datos. Error:', error);

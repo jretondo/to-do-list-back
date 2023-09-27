@@ -27,13 +27,13 @@ module.exports = () => {
 
     const usuariosPut = async (req) => {
         const { id } = req.params;
-        const { correo, ...resto } = req.body;
-        if (resto.password) {
+        const { correo, ...usuarioData } = req.body;
+        if (usuarioData.password) {
             const salt = bcryptjs.genSaltSync();
-            resto.password = bcryptjs.hashSync(resto.password, salt);
+            usuarioData.password = bcryptjs.hashSync(usuarioData.password, salt);
         }
 
-        const usuario = await Usuario.update(resto, { where: { id } });
+        const usuario = await Usuario.update(usuarioData, { where: { id } });
 
         if (usuario.length > 0) {
             return "Modificado éxitosamente!"
