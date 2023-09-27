@@ -1,4 +1,4 @@
-const { Usuario } = require('../../models');
+const { Usuario } = require('../models');
 
 const emailExiste = async (correo = '') => {
     const existeEmail = await Usuario.findOne({ where: { correo } });

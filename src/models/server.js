@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const { dbConnection } = require('../database/config');
+const { error } = require("../network/response")
 
 class Server {
     constructor() {
@@ -35,8 +36,10 @@ class Server {
     }
 
     routes() {
-        this.app.use(this.paths.usuarios, require('../routes/usuarios'));
-        this.app.use(this.paths.auth, require('../routes/auth'));
+        this.app.use(this.paths.usuarios, require('../api/components/usuarios/routes'));
+        this.app.use(this.paths.auth, require('../api/components/auth/routes'));
+        this.app.use(this.paths.tareas, require('../api/components/tareas/routes'));
+        this.app.use((err, req, res, next) => error({ req, res, body: err.message }))
     }
 
     listen() {
