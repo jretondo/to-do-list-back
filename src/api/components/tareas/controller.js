@@ -2,6 +2,7 @@ const { request } = require('express');
 
 const Tarea = require("../../../models/tarea");
 const { Op } = require('sequelize');
+const { Usuario } = require('../../../models');
 
 module.exports = () => {
 
@@ -15,8 +16,6 @@ module.exports = () => {
 
         const ITEMS_PER_PAGE = 10;
         const OFFSET = (pagina - 1) * (ITEMS_PER_PAGE);
-        console.log('OFFSET :>> ', OFFSET);
-        console.log('pagina :>> ', pagina);
         const { count, rows } = await Tarea.findAndCountAll({
             where: ((palabraBuscada || usuario_id || completada) ? {
                 [Op.or]: [
@@ -27,7 +26,11 @@ module.exports = () => {
                 ]
             } : {}),
             offset: OFFSET,
-            limit: ITEMS_PER_PAGE
+            limit: ITEMS_PER_PAGE,
+            include: [{
+                model: Usuario,
+                attributes: { exclude: ["password", "estado"] }
+            }]
         })
         return ({
             totalItems: count ? count : 0,
@@ -42,8 +45,19 @@ module.exports = () => {
         return await Tarea.create({ nombre, descripcion, usuario_id: id })
     }
 
+    const tareaGet = async (req = request) => {
+        const { id } = req.params
+        return await Tarea.findByPk(id, {
+            include: [{
+                model: Usuario,
+                attributes: { exclude: ["password", "estado"] }
+            }]
+        })
+    }
+
     return {
         tareasGet,
-        tareasPost
+        tareasPost,
+        tareaGet
     }
 }

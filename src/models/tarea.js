@@ -10,10 +10,12 @@ const Tarea = dbConnection.define("Tarea", {
         allowNull: false
     },
     nombre: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     descripcion: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        allowNull: false
     },
     fecha_creacion: {
         type: Sequelize.DATE

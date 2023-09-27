@@ -1,4 +1,3 @@
-const { response } = require('express');
 const bcryptjs = require('bcryptjs');
 const Usuario = require('../../../models/usuario');
 
@@ -43,7 +42,7 @@ module.exports = () => {
         }
     }
 
-    const usuariosDelete = async (req, res = response) => {
+    const usuariosDelete = async (req) => {
         const { id } = req.params;
         const usuario = await Usuario.destroy({ where: { id } });
 

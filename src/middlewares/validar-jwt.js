@@ -2,6 +2,7 @@ const { response, request } = require('express');
 const jwt = require('jsonwebtoken');
 
 const Usuario = require('../models/usuario');
+const { error } = require('../network/response');
 
 
 const validarJWT = async (req = request, res = response, next) => {
@@ -9,9 +10,7 @@ const validarJWT = async (req = request, res = response, next) => {
     const token = req.header('authorization');
 
     if (!token) {
-        return res.status(401).json({
-            msg: 'No hay token en la petición'
-        });
+        return error({ req, res, body: 'No hay token en la petición', status: 401 })
     }
 
     try {
@@ -20,27 +19,20 @@ const validarJWT = async (req = request, res = response, next) => {
 
         if (!usuario) {
             console.log('Usuario no existe en la BD');
-            return res.status(401).json({
-                msg: 'Token no válido'
-            })
+            return error({ req, res, body: 'Token no valido', status: 401 })
         }
 
         if (!usuario.estado) {
             console.log('Usuario inactivo');
-            return res.status(401).json({
-                msg: 'Token no válido'
-            })
+            return error({ req, res, body: 'Token no valido', status: 401 })
         }
 
-        req.usuario = usuario;
+        req.usuario = usuario.dataValues;
         next();
 
     } catch (error) {
-
         console.log(error);
-        res.status(401).json({
-            msg: 'Token no válido'
-        })
+        return error({ req, res, body: 'Token no valido', status: 401 })
     }
 }
 

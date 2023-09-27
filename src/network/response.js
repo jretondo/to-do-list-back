@@ -7,7 +7,6 @@ const success = (props) => {
 };
 
 const error = (props) => {
-    console.log('props :>> ', props);
     props.res.status(props.status || 500).json({
         error: true,
         status: props.status || 500,
