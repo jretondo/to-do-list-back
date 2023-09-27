@@ -1,7 +1,6 @@
 const success = (props) => {
     props.res.status(props.status || 200).json({
         error: false,
-        status: props.status || 200,
         body: props.body || ""
     });
 };
@@ -9,7 +8,6 @@ const success = (props) => {
 const error = (props) => {
     props.res.status(props.status || 500).json({
         error: true,
-        status: props.status || 500,
         body: props.body || ""
     });
 };

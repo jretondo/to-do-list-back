@@ -11,7 +11,8 @@ const {
 const { usuariosGet,
     usuariosPut,
     usuariosPost,
-    usuariosDelete
+    usuariosDelete,
+    usuarioGet
 } = require('./index');
 const { success } = require('../../../network/response');
 
@@ -20,6 +21,13 @@ const router = Router();
 router
 
     .get('/', (req, res, next) => usuariosGet().then((data) => success({ req, res, body: data })).catch(next))
+
+    .get('/:id', [
+        validarJWT,
+        tieneRol('ADMIN_ROL'),
+        check('id').custom(existeUsuarioPorId),
+        validarCampos
+    ], (req, res, next) => usuarioGet(req).then(body => success({ req, res, body })).catch(next))
 
     .post('/', [
         check('nombre', 'El nombre debe tener una longitud de 5 caracteres').isLength({ min: 5 }),
@@ -33,8 +41,12 @@ router
     .put('/:id', [
         validarJWT,
         tieneRol('ADMIN_ROL'),
-        check('nombre', 'El nombre debe tener una longitud de 5 caracteres').if(check('nombre').notEmpty()).isLength({ min: 5 }),
-        check('password', 'El password debe de ser más de 6 digitos').if(check('password').notEmpty()).isLength({ min: 6 }),
+        check('nombre', 'El nombre debe tener una longitud de 5 caracteres')
+            .if(check('nombre').notEmpty()).isLength({ min: 5 }),
+        check('password', 'El password debe de ser más de 6 digitos')
+            .if(check('password').notEmpty()).isLength({ min: 6 }),
+        check('rol', 'No es un rol válido')
+            .if(check('rol').notEmpty()).isIn(['ADMIN_ROL', 'USER_ROL']),
         check('id').custom(existeUsuarioPorId),
         validarCampos
     ], (req, res, next) => usuariosPut(req).then(body => success({ req, res, body })).catch(next))

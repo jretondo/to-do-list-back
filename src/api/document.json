@@ -1,0 +1,510 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "To Do List",
+        "description": "API rest para la gestión de listas de tareas",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "host": "localhost:8080",
+    "basePath": "/api",
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "login"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "correo": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "userData": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer"
+                                                    },
+                                                    "nombre": {
+                                                        "type": "string"
+                                                    },
+                                                    "rol": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            },
+                                            "token": {
+                                                "type": "string",
+                                                "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2Vy..."
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Usuario / Contraseña no son correctos"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios": {
+            "get": {
+                "tags": [
+                    "usuarios"
+                ],
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/User"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "usuarios"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "nombre": {
+                                    "type": "string"
+                                },
+                                "correo": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "rol": {
+                                    "type": "string",
+                                    "example": "ADMIN_ROL"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "nombre": {
+                                            "type": "string"
+                                        },
+                                        "correo": {
+                                            "type": "string"
+                                        },
+                                        "rol": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios/{id}": {
+            "get": {
+                "tags": [
+                    "usuarios"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "id del usuario"
+                    }
+                ],
+                "security": {
+                    "api_key": []
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "$ref": "#/definitions/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "usuarios"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer"
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token generado en el 'login'"
+                    },
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "nombre": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "rol": {
+                                    "type": "string",
+                                    "example": "ADMIN_ROL"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "nombre": {
+                                            "type": "string"
+                                        },
+                                        "correo": {
+                                            "type": "string"
+                                        },
+                                        "rol": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tareas": {
+            "get": {
+                "tags": [
+                    "tareas"
+                ],
+                "description": "",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "pagina",
+                        "description": "Para los caso de paginación - no obligatorio"
+                    },
+                    {
+                        "in": "query",
+                        "name": "palabraBuscada",
+                        "description": "Para busqueda de registros (busca en nombre y descripción) - no obligatorio"
+                    },
+                    {
+                        "in": "query",
+                        "name": "completada",
+                        "description": "Filtra por tareas competadas/no completadas - no obligatorio"
+                    },
+                    {
+                        "in": "query",
+                        "name": "usuario_id",
+                        "description": "Filtra por usuario - no obligatorio"
+                    },
+                    {
+                        "in": "header",
+                        "name": "authorization",
+                        "description": "Token generado en el 'login'"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "$ref": "#/definitions/tarea"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "api_key": {
+            "type": "apiKey",
+            "name": "authorization",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "correo": {
+                    "type": "string"
+                },
+                "rol": {
+                    "type": "string"
+                },
+                "estado": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "fecha_creacion": {
+                    "type": "date",
+                    "example": "2023-09-27T11:59:09.513Z"
+                },
+                "fecha_modificacion": {
+                    "type": "date",
+                    "example": "2023-09-27T11:59:09.513Z"
+                }
+            }
+        },
+        "tarea": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "descripcion": {
+                    "type": "string"
+                },
+                "completada": {
+                    "type": "boolean",
+                    "example": false
+                },
+                "usuario_id": {
+                    "type": "integer"
+                },
+                "fecha_creacion": {
+                    "type": "date",
+                    "example": "2023-09-27T11:59:09.513Z"
+                }
+            }
+        },
+        "ValidationErrorsResponse": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "msg": {
+                        "type": "string"
+                    },
+                    "param": {
+                        "type": "string"
+                    },
+                    "location": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

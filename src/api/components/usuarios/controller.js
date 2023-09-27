@@ -8,6 +8,13 @@ module.exports = () => {
         })
     }
 
+    const usuarioGet = async (req) => {
+        const { id } = req.params
+        return await Usuario.findByPk(id, {
+            attributes: { exclude: ["password"] }
+        })
+    }
+
     const usuariosPost = async (req) => {
         const { nombre, correo, password, rol } = req.body;
         const usuario = await Usuario.create({ nombre, correo, password, rol });
@@ -58,5 +65,6 @@ module.exports = () => {
         usuariosPost,
         usuariosPut,
         usuariosDelete,
+        usuarioGet
     }
 }

@@ -18,6 +18,7 @@
     "express-validator": "^6.9.2",
     "jsonwebtoken": "^8.5.1",
     "sequelize": "^6.33.0",
+    "swagger-ui-express": "^5.0.0",
     "tedious": "^16.4.1"
   }
 }
