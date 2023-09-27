@@ -14,6 +14,13 @@ const emailNoExiste = async (correo = '') => {
     }
 }
 
+const noExistenUsuarios = async () => {
+    const existenUsuarios = await Usuario.findAll();
+    if (existenUsuarios.length > 0) {
+        throw new Error(`Ya existen usuarios registrado!`);
+    }
+}
+
 const existeUsuarioPorId = async (id) => {
     const existeUsuario = await Usuario.findByPk(id);
     if (!existeUsuario) {
@@ -32,6 +39,7 @@ module.exports = {
     emailExiste,
     existeUsuarioPorId,
     emailNoExiste,
-    existeTareaPorId
+    existeTareaPorId,
+    noExistenUsuarios
 }
 

@@ -16,7 +16,7 @@
                 "tags": [
                     "login"
                 ],
-                "description": "",
+                "description": "Ruta para loguearse y obtener el Token",
                 "parameters": [
                     {
                         "in": "body",
@@ -105,6 +105,21 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -114,7 +129,7 @@
                 "tags": [
                     "usuarios"
                 ],
-                "description": "",
+                "description": "Ruta para obtener la lista de usuarios. El acceso a la lista es pública a fines prácticos de prueba.",
                 "parameters": [],
                 "responses": {
                     "200": {
@@ -140,7 +155,12 @@
                 "tags": [
                     "usuarios"
                 ],
-                "description": "",
+                "description": "Ruta para generar un nuevo usuario",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "in": "body",
@@ -212,6 +232,21 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -221,7 +256,7 @@
                 "tags": [
                     "usuarios"
                 ],
-                "description": "",
+                "description": "Ruta para obtener un usuario",
                 "parameters": [
                     {
                         "in": "path",
@@ -229,9 +264,11 @@
                         "description": "id del usuario"
                     }
                 ],
-                "security": {
-                    "api_key": []
-                },
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "successful operation",
@@ -266,6 +303,21 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -273,17 +325,17 @@
                 "tags": [
                     "usuarios"
                 ],
-                "description": "",
+                "description": "Ruta para modificar un usuario",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "in": "path",
                         "name": "id",
                         "type": "integer"
-                    },
-                    {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token generado en el 'login'"
                     },
                     {
                         "in": "body",
@@ -292,6 +344,158 @@
                             "type": "object",
                             "properties": {
                                 "nombre": {
+                                    "type": "string"
+                                },
+                                "password": {
+                                    "type": "string"
+                                },
+                                "rol": {
+                                    "type": "string",
+                                    "example": "ADMIN_ROL"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Modificado éxitosamente!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "usuarios"
+                ],
+                "description": "Ruta para eliminar un usuario",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Eliminado éxitosamente!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/usuarios/primer": {
+            "post": {
+                "tags": [
+                    "usuarios"
+                ],
+                "description": "Ruta para generar el primer usuario. Si se detecta que hay registros de usuarios, se devolverá un mensaje de error.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "nombre": {
+                                    "type": "string"
+                                },
+                                "correo": {
                                     "type": "string"
                                 },
                                 "password": {
@@ -352,6 +556,21 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -361,32 +580,36 @@
                 "tags": [
                     "tareas"
                 ],
-                "description": "",
+                "description": "Rut. El 'ADMIN_ROLE' puede filtrar por cualquier usuario. Pero el 'USER_ROLE' solo puede consultar tareas de si mismo.",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "in": "query",
                         "name": "pagina",
-                        "description": "Para los caso de paginación - no obligatorio"
+                        "description": "Para los caso de paginación - no obligatorio",
+                        "type": "integer"
                     },
                     {
                         "in": "query",
                         "name": "palabraBuscada",
-                        "description": "Para busqueda de registros (busca en nombre y descripción) - no obligatorio"
+                        "description": "Para busqueda de registros (busca en nombre y descripción) - no obligatorio",
+                        "type": "string"
                     },
                     {
                         "in": "query",
                         "name": "completada",
-                        "description": "Filtra por tareas competadas/no completadas - no obligatorio"
+                        "description": "Filtra por tareas competadas/no completadas - no obligatorio",
+                        "type": "boolean"
                     },
                     {
                         "in": "query",
                         "name": "usuario_id",
-                        "description": "Filtra por usuario - no obligatorio"
-                    },
-                    {
-                        "in": "header",
-                        "name": "authorization",
-                        "description": "Token generado en el 'login'"
+                        "description": "Filtra por usuario - no obligatorio",
+                        "type": "integer"
                     }
                 ],
                 "responses": {
@@ -399,7 +622,10 @@
                                     "example": false
                                 },
                                 "body": {
-                                    "$ref": "#/definitions/tarea"
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Tarea"
+                                    }
                                 }
                             }
                         }
@@ -422,16 +648,335 @@
                                 }
                             }
                         }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "tareas"
+                ],
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "description": "Ruta para generar una nueva tarea",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "nombre": {
+                                    "type": "string"
+                                },
+                                "descripcion": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "$ref": "#/definitions/Tarea"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tareas/{id}": {
+            "get": {
+                "tags": [
+                    "tareas"
+                ],
+                "description": "Ruta para obtener una tarea",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID de la tarea a consultar"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "$ref": "#/definitions/Tarea"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "tareas"
+                ],
+                "description": "Ruta para modificar una tarea",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID de la tarea a modificar"
+                    },
+                    {
+                        "in": "body",
+                        "name": "data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "nombre": {
+                                    "type": "string"
+                                },
+                                "descripcion": {
+                                    "type": "string"
+                                },
+                                "completada": {
+                                    "type": "boolean"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Modificado éxitosamente!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "tareas"
+                ],
+                "description": "Ruta para eliminar una tarea",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "ID de la tarea a eliminar"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Eliminado éxitosamente!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     },
     "securityDefinitions": {
-        "api_key": {
+        "ApiKeyAuth": {
             "type": "apiKey",
-            "name": "authorization",
-            "in": "header"
+            "in": "header",
+            "name": "authorization"
         }
     },
     "definitions": {
@@ -464,7 +1009,7 @@
                 }
             }
         },
-        "tarea": {
+        "Tarea": {
             "type": "object",
             "properties": {
                 "id": {

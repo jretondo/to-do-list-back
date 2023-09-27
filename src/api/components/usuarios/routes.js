@@ -1,7 +1,7 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { emailExiste, existeUsuarioPorId } = require('../../../helpers/db-validators');
+const { emailExiste, existeUsuarioPorId, noExistenUsuarios } = require('../../../helpers/db-validators');
 const {
     validarCampos,
     validarJWT,
@@ -29,12 +29,24 @@ router
         validarCampos
     ], (req, res, next) => usuarioGet(req).then(body => success({ req, res, body })).catch(next))
 
-    .post('/', [
+    .post('/primer', [
+        check('correo').custom(noExistenUsuarios),
         check('nombre', 'El nombre debe tener una longitud de 5 caracteres').isLength({ min: 5 }),
         check('password', 'El password debe de ser más de 6 digitos').isLength({ min: 6 }),
         check('correo', 'El correo no es válido').isEmail(),
         check('correo').custom(emailExiste),
-        check('rol', 'No es un rol válido').isIn(['ADMIN_ROL', 'USER_ROL']),
+        check('rol', 'No es un rol válido').isIn(['ADMIN_ROL']),
+        validarCampos
+    ], (req, res, next) => usuariosPost(req).then(body => success({ req, res, status: 201, body })).catch(next))
+
+    .post('/', [
+        validarJWT,
+        tieneRol('ADMIN_ROL'),
+        check('nombre', 'El nombre debe tener una longitud de 5 caracteres').isLength({ min: 5 }),
+        check('password', 'El password debe de ser más de 6 digitos').isLength({ min: 6 }),
+        check('correo', 'El correo no es válido').isEmail(),
+        check('correo').custom(emailExiste),
+        check('rol', 'No es un rol válido').isIn(['USER_ROL', 'ADMIN_ROL']),
         validarCampos
     ], (req, res, next) => usuariosPost(req).then(body => success({ req, res, status: 201, body })).catch(next))
 

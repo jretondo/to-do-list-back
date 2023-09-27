@@ -10,16 +10,22 @@ module.exports = () => {
             completada,
             usuario_id
         } = req.query
+        console.log('req.usuario :>> ', req.usuario);
+        let id_ususario = usuario_id
+        if (req.usuario.rol == "USER_ROL") {
+            id_ususario = req.usuario.id
+        }
+        console.log('id_ususario :>> ', id_ususario);
         if (pagina) {
             const ITEMS_PER_PAGE = 10;
             const OFFSET = (pagina - 1) * (ITEMS_PER_PAGE);
             const { count, rows } = await Tarea.findAndCountAll({
-                where: ((palabraBuscada || usuario_id || completada) ? {
-                    [Op.or]: [
+                where: ((palabraBuscada || id_ususario || completada) ? {
+                    [Op.and]: [
                         palabraBuscada && { nombre: { [Op.like]: `%${palabraBuscada}%` } },
                         palabraBuscada && { descripcion: { [Op.like]: `%${palabraBuscada}%` } },
                         completada && { completada },
-                        usuario_id && { usuario_id }
+                        id_ususario && { usuario_id: id_ususario }
                     ]
                 } : {}),
                 offset: OFFSET,
@@ -37,6 +43,14 @@ module.exports = () => {
             })
         } else {
             return await Tarea.findAll({
+                where: ((palabraBuscada || id_ususario || completada) ? {
+                    [Op.and]: [
+                        palabraBuscada && { nombre: { [Op.like]: `%${palabraBuscada}%` } },
+                        palabraBuscada && { descripcion: { [Op.like]: `%${palabraBuscada}%` } },
+                        completada && { completada },
+                        id_ususario && { usuario_id: id_ususario }
+                    ]
+                } : {}),
                 order: [["id", "DESC"]],
                 include: [{
                     model: Usuario,

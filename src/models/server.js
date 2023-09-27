@@ -6,6 +6,7 @@ const { error } = require("../network/response")
 
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('../api/document.json');
+const path = require('path');
 class Server {
     constructor() {
         this.app = express();
@@ -26,7 +27,6 @@ class Server {
     handleConn = async () => {
         try {
             await dbConnection.authenticate();
-            //dbConnection.sync({ alter: true })
             console.log('Base de datos conectada con éxito!');
         } catch (error) {
             console.error('No se ha podido conectar a la base de datos. Error:', error);
@@ -46,6 +46,9 @@ class Server {
         this.app.use(this.paths.documentacion, swaggerUi.serve);
         this.app.use(this.paths.documentacion, swaggerUi.setup(swaggerDocument));
         this.app.use((err, req, res, next) => error({ req, res, body: err.message }))
+        this.app.get('*', function (req, res) {
+            res.sendFile(path.join(__dirname, '..', '..', 'public', 'html', 'error404.html'));
+        });
     }
 
     listen() {
