@@ -3,12 +3,16 @@ require('dotenv').config();
 const Server = require("../src/api/app");
 
 let token = ""
-let lastIdInserted = 0
-let lastNumber = 0
+let idUltimoUsuario = 0
+let cantidadUsuarios = 0
 let lastTareaIdInserted = 0
-const correctLoginData = {
-    correo: "jretondo@osecac.org.ar",
-    password: "123456"
+let idPrimerUsuario = 0
+
+const primerUsuario = {
+    nombre: "Javier Retondo",
+    correo: "jretondo@gmail.com",
+    password: "123456",
+    rol: "ADMIN_ROL"
 }
 
 const nuevaTarea = {
@@ -16,74 +20,95 @@ const nuevaTarea = {
     descripcion: "Esta es una nueva descripcion"
 }
 
+describe('POST /usuarios/primer', function () {
+    it('Crea el primer usuario. Si la base de datos está vacía. Deebería devolver status 200 y la insersión.', async function () {
+
+        const response = await request(Server.app)
+            .post('/api/usuarios/primer')
+            .send(primerUsuario)
+        idUltimoUsuario = response.body.body.id
+        idPrimerUsuario = response.body.body.id
+        expect(response.status).toEqual(201);
+        expect(response.body.body).toBeInstanceOf(Object)
+    });
+
+    it('Como ya está creado el primer usuario. No debería permitir crear otro sin el correspondiente token.', async function () {
+
+        const response = await request(Server.app)
+            .post('/api/usuarios/primer')
+            .send({ correo: "_" + primerUsuario.correo, ...primerUsuario })
+        idUltimoUsuario = response.body.body.id
+        expect(response.status).toEqual(401);
+        expect(response.body.body.errors).toBeInstanceOf(Array);
+    });
+});
+
 describe('POST /auth/login', function () {
-    it('Tiene que devolver status 200 y el token', async function () {
+    it('Nos logueamos con el primer usuario para obtener el token. Tiene que devolver status 200 y el token', async function () {
 
         const response = await request(Server.app)
             .post('/api/auth/login')
-            .send(correctLoginData)
+            .send(primerUsuario)
         expect(response.status).toEqual(200);
         token = response.body.body.token
         expect(response.body.body.token).not.toBeNull();
     });
 
     it('Tiene que devolver status 401 y avisar que el correo es obligatorio', async function () {
-        const loginData = {
-            password: "123456"
-        }
+
         const response = await request(Server.app)
             .post('/api/auth/login')
-            .send(loginData)
+            .send({ password: "654321" })
         expect(response.status).toEqual(401);
         expect(response.body.body.errors).toBeInstanceOf(Array);
         expect(response.body.body.errors.filter(error => error.param === "correo").length).toBeGreaterThan(0);
     });
 
     it('Tiene que devolver status 400 y avisar que el usuario o contraseña no son correctos', async function () {
-        const loginData = {
-            correo: correctLoginData.correo,
-            password: "121231"
-        }
+
         const response = await request(Server.app)
             .post('/api/auth/login')
-            .send(loginData)
+            .send({
+                correo: primerUsuario.correo,
+                password: "121231"
+            })
         expect(response.status).toEqual(400);
         expect(response.body.body).toMatch(/no son correctos/);
     });
 });
 
-describe('GET /users', function () {
+describe('GET /usuarios', function () {
     it('Tiene que devolver codigo de status 200 y una colección de array', async function () {
         const response = await request(Server.app)
             .get('/api/usuarios')
-        lastNumber = response.body.body.length
+        cantidadUsuarios = response.body.body.length
         expect(response.status).toEqual(200);
         expect(response.body.body).toBeInstanceOf(Array)
     });
 });
 
-describe('POST /users', function () {
+describe('POST /usuarios', function () {
     it('Tiene que devolver codigo de status 201 y devolver la nueva insersión', async function () {
         const data = {
-            nombre: lastNumber + "nuevo_ususario",
-            correo: lastNumber + correctLoginData.correo,
-            password: correctLoginData.password,
+            nombre: cantidadUsuarios + "nuevo_ususario",
+            correo: cantidadUsuarios + primerUsuario.correo,
+            password: primerUsuario.password,
             rol: "ADMIN_ROL"
         }
         const response = await request(Server.app)
             .post('/api/usuarios')
             .set('authorization', token)
             .send(data)
-        lastIdInserted = response.body.body.id
+        idUltimoUsuario = response.body.body.id
         expect(response.status).toEqual(201);
         expect(response.body.body).toBeInstanceOf(Object)
     });
 
     it('Se repite un email. Tiene que devolver código de status 401 y devolver el error', async function () {
         const data = {
-            nombre: lastNumber + "nuevo_ususario",
-            correo: lastNumber + correctLoginData.correo,
-            password: correctLoginData.password,
+            nombre: cantidadUsuarios + "nuevo_ususario",
+            correo: cantidadUsuarios + primerUsuario.correo,
+            password: primerUsuario.password,
             rol: "ADMIN_ROL"
         }
 
@@ -96,15 +121,15 @@ describe('POST /users', function () {
     });
 });
 
-describe('PUT /users', function () {
+describe('PUT /usuarios', function () {
     it('Tiene que devolver codigo de status 200', async function () {
         const data = {
-            nombre: lastNumber + "nuevo_ususario_2",
-            password: correctLoginData.password,
+            nombre: cantidadUsuarios + "nuevo_ususario_2",
+            password: primerUsuario.password,
             rol: "USER_ROL"
         }
         const response = await request(Server.app)
-            .put('/api/usuarios/' + lastIdInserted)
+            .put('/api/usuarios/' + idUltimoUsuario)
             .set('authorization', token)
             .send(data)
         expect(response.status).toEqual(200);
@@ -113,12 +138,12 @@ describe('PUT /users', function () {
 
     it('No se envía el token. Debería dar status 401 y el mensaje de error.', async function () {
         const data = {
-            nombre: lastNumber + "nuevo_ususario_2",
-            password: correctLoginData.password,
+            nombre: cantidadUsuarios + "nuevo_ususario_2",
+            password: primerUsuario.password,
             rol: "ADMIN_ROL"
         }
         const response = await request(Server.app)
-            .put('/api/usuarios/' + lastIdInserted)
+            .put('/api/usuarios/' + idUltimoUsuario)
             .send(data)
         expect(response.status).toEqual(401);
         expect(response.body.body).toMatch(/Token no/);
@@ -127,24 +152,24 @@ describe('PUT /users', function () {
 
 describe('POST /auth/login', function () {
     it('Se loguea con el nuevo ususario que posee USER_ROL por la última modificación.', async function () {
-        const newUserLogin = {
-            correo: lastNumber + correctLoginData.correo,
-            password: correctLoginData.password,
+        const nuevoUsuario = {
+            correo: cantidadUsuarios + primerUsuario.correo,
+            password: primerUsuario.password,
         }
         const response = await request(Server.app)
             .post('/api/auth/login')
-            .send(newUserLogin)
+            .send(nuevoUsuario)
         expect(response.status).toEqual(200);
         token = response.body.body.token
         expect(response.body.body.token).not.toBeNull();
     });
 });
 
-describe('DELETE /users', function () {
+describe('DELETE /usuarios', function () {
     it('Ahora se usa un token de un usuario con permisos de "USER_ROL". Debería devolver status 401.', async function () {
 
         const response = await request(Server.app)
-            .delete('/api/usuarios/' + lastIdInserted)
+            .delete('/api/usuarios/' + idUltimoUsuario)
             .set('authorization', token)
             .send()
         expect(response.status).toEqual(401);
@@ -157,18 +182,18 @@ describe('POST /auth/login', function () {
 
         const response = await request(Server.app)
             .post('/api/auth/login')
-            .send(correctLoginData)
+            .send(primerUsuario)
         expect(response.status).toEqual(200);
         token = response.body.body.token
         expect(response.body.body.token).not.toBeNull();
     });
 });
 
-describe('DELETE /users', function () {
+describe('DELETE /usuarios', function () {
     it('Tiene que devolver codigo de status 200 y devolver mensaje de eliminación correcta', async function () {
 
         const response = await request(Server.app)
-            .delete('/api/usuarios/' + lastIdInserted)
+            .delete('/api/usuarios/' + idUltimoUsuario)
             .set('authorization', token)
             .send()
         expect(response.status).toEqual(200);
@@ -264,5 +289,28 @@ describe('GET /tareas', function () {
         expect(response.status).toEqual(401);
         expect(response.body.body.errors).toBeInstanceOf(Array);
         expect(response.body.body.errors.filter(error => error.msg === `El id ${lastTareaIdInserted} no existe`).length).toBeGreaterThan(0);
+    });
+});
+
+describe('DELETE /usuarios', function () {
+    it('Eliminamos el primer usuario de la tabla usuarios. Tiene que devolver codigo de status 200 y devolver mensaje de eliminación correcta', async function () {
+
+        const response = await request(Server.app)
+            .delete('/api/usuarios/' + idPrimerUsuario)
+            .set('authorization', token)
+            .send()
+        expect(response.status).toEqual(200);
+        expect(response.body.body).toMatch(/Eliminado/);
+    });
+});
+
+describe('GET /usuarios', function () {
+    it('Tiene que devolver codigo de status 200 y una colección de array vacio. La tabla debería estar vacía.', async function () {
+        const response = await request(Server.app)
+            .get('/api/usuarios')
+        cantidadUsuarios = response.body.body.length
+        expect(response.status).toEqual(200);
+        expect(response.body.body).toBeInstanceOf(Array)
+        expect(response.body.body.length).toEqual(0)
     });
 });
