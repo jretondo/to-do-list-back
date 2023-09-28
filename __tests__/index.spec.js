@@ -1,5 +1,4 @@
 const request = require("supertest");
-require('dotenv').config();
 const Server = require("../src/api/app");
 
 let token = ""
