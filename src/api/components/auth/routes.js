@@ -1,9 +1,9 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
+const { success, error } = require('../../../network/response');
 const { validarCampos } = require('../../../middlewares');
 const { login } = require('./index');
-const { success, error } = require('../../../network/response');
 const { emailNoExiste } = require('../../../helpers/db-validators');
 
 const router = Router();

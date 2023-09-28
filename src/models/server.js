@@ -45,9 +45,13 @@ class Server {
         this.app.use(this.paths.tareas, require('../api/components/tareas/routes'));
         this.app.use(this.paths.documentacion, swaggerUi.serve);
         this.app.use(this.paths.documentacion, swaggerUi.setup(swaggerDocument));
-        this.app.use((err, req, res, next) => error({ req, res, body: err.message }))
+        this.app.use((err, req, res, next) => {
+            //No mando los mensajes de errores del servidor al cliente por seguridad. Lo guardo en el log del sistema.
+            console.log('[err]: ', err);
+            error({ req, res, body: "Error interno del servidor - comunicarse con el administrador" })
+        })
         this.app.get('*', function (req, res) {
-            res.sendFile(path.join(__dirname, '..', '..', 'public', 'html', 'error404.html'));
+            res.status(404).sendFile(path.join(__dirname, '..', '..', 'public', 'html', 'error404.html'));
         });
     }
 

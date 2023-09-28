@@ -1,20 +1,27 @@
 
 const { Router } = require('express');
 const { check } = require('express-validator');
-const { emailExiste, existeUsuarioPorId, noExistenUsuarios } = require('../../../helpers/db-validators');
+const { success } = require('../../../network/response');
+
 const {
     validarCampos,
     validarJWT,
     tieneRol
 } = require('../../../middlewares');
 
-const { usuariosGet,
+const {
+    emailExiste,
+    existeUsuarioPorId,
+    noExistenUsuarios
+} = require('../../../helpers/db-validators');
+
+const {
+    usuariosGet,
     usuariosPut,
     usuariosPost,
     usuariosDelete,
     usuarioGet
 } = require('./index');
-const { success } = require('../../../network/response');
 
 const router = Router();
 

@@ -5,17 +5,18 @@ const { Usuario } = require('../../../models');
 module.exports = () => {
     const tareasGet = async (req) => {
         const {
-            pagina,
             palabraBuscada,
             completada,
             usuario_id
         } = req.query
-        console.log('req.usuario :>> ', req.usuario);
+
+        const { pagina } = req.params
+
         let id_ususario = usuario_id
         if (req.usuario.rol == "USER_ROL") {
             id_ususario = req.usuario.id
         }
-        console.log('id_ususario :>> ', id_ususario);
+
         if (pagina) {
             const ITEMS_PER_PAGE = 10;
             const OFFSET = (pagina - 1) * (ITEMS_PER_PAGE);
@@ -39,7 +40,7 @@ module.exports = () => {
             return ({
                 totalItems: count ? count : 0,
                 itemsPerPage: ITEMS_PER_PAGE,
-                showedItems: rows ? rows : 0
+                showedItems: rows ? rows : []
             })
         } else {
             return await Tarea.findAll({

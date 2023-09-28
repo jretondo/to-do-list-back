@@ -580,19 +580,13 @@
                 "tags": [
                     "tareas"
                 ],
-                "description": "Rut. El 'ADMIN_ROLE' puede filtrar por cualquier usuario. Pero el 'USER_ROLE' solo puede consultar tareas de si mismo.",
+                "description": "Ruta para obtener lista de tareas.",
                 "security": [
                     {
                         "ApiKeyAuth": []
                     }
                 ],
                 "parameters": [
-                    {
-                        "in": "query",
-                        "name": "pagina",
-                        "description": "Para los caso de paginación - no obligatorio",
-                        "type": "integer"
-                    },
                     {
                         "in": "query",
                         "name": "palabraBuscada",
@@ -694,7 +688,7 @@
                     }
                 ],
                 "responses": {
-                    "200": {
+                    "201": {
                         "schema": {
                             "type": "object",
                             "properties": {
@@ -930,6 +924,109 @@
                                 "body": {
                                     "type": "string",
                                     "example": "Eliminado éxitosamente!"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "errors": {
+                                            "$ref": "#/definitions/ValidationErrorsResponse"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": true
+                                },
+                                "body": {
+                                    "type": "string",
+                                    "example": "Error interno - comunicarse con el administrador del servicio"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tareas/paginacion/{pagina}": {
+            "get": {
+                "tags": [
+                    "tareas"
+                ],
+                "description": "Ruta para obtener lista de tareas con paginación.",
+                "security": [
+                    {
+                        "ApiKeyAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "pagina",
+                        "description": "Para los caso de paginación - no obligatorio",
+                        "type": "integer"
+                    },
+                    {
+                        "in": "query",
+                        "name": "palabraBuscada",
+                        "description": "Para busqueda de registros (busca en nombre y descripción) - no obligatorio",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "completada",
+                        "description": "Filtra por tareas competadas/no completadas - no obligatorio",
+                        "type": "boolean"
+                    },
+                    {
+                        "in": "query",
+                        "name": "usuario_id",
+                        "description": "Filtra por usuario - no obligatorio",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "boolean",
+                                    "example": false
+                                },
+                                "body": {
+                                    "type": "object",
+                                    "properties": {
+                                        "totalItems": {
+                                            "type": "integer"
+                                        },
+                                        "itemsPerPage": {
+                                            "type": "integer"
+                                        },
+                                        "showedItems": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/Tarea"
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
