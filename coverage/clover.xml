@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1696085795263" clover="3.2.0">
+  <project timestamp="1696085795263" name="All files">
+    <metrics statements="271" coveredstatements="242" conditionals="90" coveredconditionals="48" methods="62" coveredmethods="55" elements="423" coveredelements="345" complexity="0" loc="271" ncloc="271" packages="8" files="21" classes="21"/>
+    <package name="api.components.auth">
+      <metrics statements="34" coveredstatements="30" conditionals="8" coveredconditionals="6" methods="4" coveredmethods="4"/>
+      <file name="controller.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\api\components\auth\controller.js">
+        <metrics statements="21" coveredstatements="17" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="11" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="21" count="4" type="stmt"/>
+        <line num="22" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="27" count="3" type="stmt"/>
+        <line num="34" count="3" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+      </file>
+      <file name="index.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\api\components\auth\index.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+      <file name="routes.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\api\components\auth\routes.js">
+        <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="17" count="4" type="stmt"/>
+        <line num="18" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="22" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="api.components.tareas">
+      <metrics statements="55" coveredstatements="52" conditionals="38" coveredconditionals="15" methods="18" coveredmethods="18"/>
+      <file name="controller.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\api\components\tareas\controller.js">
+        <metrics statements="37" coveredstatements="34" conditionals="38" coveredconditionals="15" methods="6" coveredmethods="6"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="20" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="64" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="70" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="84" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="93" count="1" type="stmt"/>
+        <line num="95" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="102" count="1" type="stmt"/>
+      </file>
+      <file name="index.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\api\components\tareas\index.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+      <file name="routes.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\api\components\tareas\routes.js">
+        <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="12"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="81" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="api.components.usuarios">
+      <metrics statements="49" coveredstatements="44" conditionals="6" coveredconditionals="3" methods="18" coveredmethods="15"/>
+      <file name="controller.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\api\components\usuarios\controller.js">
+        <metrics statements="32" coveredstatements="28" conditionals="6" coveredconditionals="3" methods="6" coveredmethods="5"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="45" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+        <line num="53" count="2" type="stmt"/>
+        <line num="54" count="2" type="stmt"/>
+        <line num="56" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="57" count="2" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+      </file>
+      <file name="index.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\api\components\usuarios\index.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+      </file>
+      <file name="routes.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\api\components\usuarios\routes.js">
+        <metrics statements="15" coveredstatements="14" conditionals="0" coveredconditionals="0" methods="12" coveredmethods="10"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="30" count="2" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="58" count="1" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="78" count="2" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="database">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="config.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\database\config.js">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="helpers">
+      <metrics statements="32" coveredstatements="28" conditionals="15" coveredconditionals="9" methods="8" coveredmethods="8"/>
+      <file name="db-validators.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\helpers\db-validators.js">
+        <metrics statements="22" coveredstatements="20" conditionals="12" coveredconditionals="8" methods="5" coveredmethods="5"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="4" count="4" type="stmt"/>
+        <line num="5" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="10" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="26" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="32" count="4" type="stmt"/>
+        <line num="33" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+      </file>
+      <file name="generar-jwt.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\helpers\generar-jwt.js">
+        <metrics statements="10" coveredstatements="8" conditionals="3" coveredconditionals="1" methods="3" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="cond" truecount="0" falsecount="1"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="13" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="middlewares">
+      <metrics statements="44" coveredstatements="37" conditionals="13" coveredconditionals="9" methods="4" coveredmethods="4"/>
+      <file name="index.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\middlewares\index.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
+      <file name="validar-campos.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\middlewares\validar-campos.js">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="24" type="stmt"/>
+        <line num="6" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="9" count="19" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+      <file name="validar-jwt.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\middlewares\validar-jwt.js">
+        <metrics statements="21" coveredstatements="16" conditionals="6" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="11" count="15" type="stmt"/>
+        <line num="13" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="17" count="14" type="stmt"/>
+        <line num="18" count="14" type="stmt"/>
+        <line num="19" count="14" type="stmt"/>
+        <line num="21" count="14" type="cond" truecount="1" falsecount="1"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="26" count="14" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="31" count="14" type="stmt"/>
+        <line num="32" count="14" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+      </file>
+      <file name="validar-roles.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\middlewares\validar-roles.js">
+        <metrics statements="11" coveredstatements="9" conditionals="5" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="10" type="cond" truecount="0" falsecount="1"/>
+        <line num="6" count="14" type="cond" truecount="1" falsecount="1"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="10" count="14" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="13" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="models">
+      <metrics statements="49" coveredstatements="43" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="4"/>
+      <file name="index.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\models\index.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
+      <file name="server.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\models\server.js">
+        <metrics statements="34" coveredstatements="28" conditionals="2" coveredconditionals="1" methods="8" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="50" count="0" type="stmt"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+      </file>
+      <file name="tarea.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\models\tarea.js">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+      </file>
+      <file name="usuario.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\models\usuario.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="network">
+      <metrics statements="5" coveredstatements="5" conditionals="8" coveredconditionals="5" methods="2" coveredmethods="2"/>
+      <file name="response.js" path="C:\Users\Javier Retondo\Downloads\curso-node-restserver-4.0.0\to-do-list\src\network\response.js">
+        <metrics statements="5" coveredstatements="5" conditionals="8" coveredconditionals="5" methods="2" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="16" type="cond" truecount="2" falsecount="0"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="15" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
