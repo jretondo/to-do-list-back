@@ -8,7 +8,7 @@ export const sequelize = new Sequelize(
     dialect: 'mssql',
     host: ConfigServer.prototype.dbConnection.host,
     port: ConfigServer.prototype.dbConnection.port,
-    logging: true,
+    logging: false,
     dialectOptions: {
         options: {
             useUTC: false,
